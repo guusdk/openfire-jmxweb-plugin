@@ -57,6 +57,7 @@ public class JmxWebPlugin implements Plugin  {
     private DatabasePool database = null;
     private EmailScheduler emailScheduler = null;
     private WebAppContext context;
+    private WebAppContext simplePluginContext;
 
     public void initializePlugin(PluginManager manager, File pluginDirectory) {
         Log.info( "["+ NAME + "] initialize " + NAME + " plugin resources");
@@ -126,6 +127,12 @@ public class JmxWebPlugin implements Plugin  {
                     context.setSecurityHandler(basicAuth("jmxweb"));
                 }
                 HttpBindManager.getInstance().addJettyHandler(context);
+
+                simplePluginContext = new WebAppContext();
+                simplePluginContext.setContextPath("/simple-plugin");
+                simplePluginContext.setWar( pluginDirectory.getPath() + File.separator + "lib"+ File.separator + "simple-plugin-2.11.1.war" );
+                HttpBindManager.getInstance().addJettyHandler(simplePluginContext);
+
             }
             catch(Exception e) {
                 Log.error( "An error has occurred", e );
@@ -174,6 +181,7 @@ public class JmxWebPlugin implements Plugin  {
         }
 
         HttpBindManager.getInstance().removeJettyHandler(context);
+        HttpBindManager.getInstance().removeJettyHandler(simplePluginContext);
 
         Log.info("["+ NAME + "]  plugin fully destroyed.");
     }

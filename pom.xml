@@ -28,6 +28,14 @@
             <version>2.11.1</version> <!-- if you change this, make sure to change the name of the war file that's loaded in the JmxWebPlugin code! -->
             <type>war</type>
         </dependency>
+
+        <dependency>
+            <groupId>io.hawt</groupId>
+            <artifactId>simple-plugin</artifactId>
+            <version>2.11.1</version>
+            <type>war</type>
+        </dependency>
+
         <dependency>
             <groupId>org.quartz-scheduler</groupId>
             <artifactId>quartz</artifactId>
